@@ -23,4 +23,12 @@ public class SmallFish extends Game {
 		viewport = new StretchViewport(SmallFish.WIDTH, SmallFish.HEIGHT, camera);
 	}
 
+	public void render() {
+		super.render();
+	}
+
+	public void dispose() {
+		super.dispose();
+	}
+
 }
