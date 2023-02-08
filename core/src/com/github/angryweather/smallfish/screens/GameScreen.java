@@ -56,7 +56,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        System.out.println("Disposing...");
-        textureAtlas.dispose();
+        game.manager.assetManager.dispose();
     }
 }
