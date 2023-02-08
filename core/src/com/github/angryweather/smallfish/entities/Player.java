@@ -7,6 +7,7 @@ import com.github.angryweather.smallfish.SmallFish;
 public class Player {
     public final Rectangle playerRect = new Rectangle();
 
+    // attach a rectangle to the player
     public Player(TextureRegion player) {
         playerRect.x = 0;
         playerRect.y = SmallFish.HEIGHT / 2f - (player.getRegionHeight() / 2f);
