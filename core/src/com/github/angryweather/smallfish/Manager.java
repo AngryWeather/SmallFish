@@ -1,13 +1,13 @@
 package com.github.angryweather.smallfish;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Manager {
-    private final AssetManager assetManager = new AssetManager();
+    public final AssetManager assetManager = new AssetManager();
 
-    private void loadGameAssets() {
-        assetManager.load("smallFishBlue.png", Texture.class);
+    public void loadGameAssets() {
+        assetManager.load("assets/fish.atlas", TextureAtlas.class);
         assetManager.finishLoading();
     }
 }
