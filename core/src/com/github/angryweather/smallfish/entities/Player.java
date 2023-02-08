@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.github.angryweather.smallfish.SmallFish;
 
 public class Player {
-    private final Rectangle playerRect = new Rectangle();
+    public final Rectangle playerRect = new Rectangle();
 
     public Player(TextureRegion player) {
         playerRect.x = 0;

@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.angryweather.smallfish.SmallFish;
+import com.github.angryweather.smallfish.entities.Player;
 
 public class GameScreen implements Screen {
     private final SmallFish game;
     private TextureAtlas.AtlasRegion smallFishBlue;
     TextureAtlas textureAtlas;
+    private Player player;
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -21,6 +23,7 @@ public class GameScreen implements Screen {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = textureAtlas.findRegion("smallFishBlue");
+        player = new Player(smallFishBlue);
     }
 
     @Override
@@ -30,7 +33,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(Color.TEAL);
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
-        game.spriteBatch.draw(smallFishBlue, 0, SmallFish.HEIGHT / 2f);
+        game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
         game.spriteBatch.end();
 
     }
