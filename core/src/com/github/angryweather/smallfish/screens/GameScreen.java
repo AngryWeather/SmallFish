@@ -46,17 +46,21 @@ public class GameScreen implements Screen {
 
         ScreenUtils.clear(Color.TEAL);
 
-        if (TimeUtils.nanoTime() - timer > 1000000000) {
+        if (TimeUtils.nanoTime() - timer > 1000000000L) {
+            timer = TimeUtils.nanoTime();
             FishTypes randomEnemy = randomFishType();
             enemy = textureAtlas.findRegion(randomEnemy.toString());
             EnemyFish enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
         }
+
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
 
         for (EnemyFish enemyFish : enemyFishAll) {
+            System.out.println(enemyFish.enemyRect.x);
+            game.spriteBatch.draw(enemy, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
         }
 
