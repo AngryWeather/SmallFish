@@ -14,4 +14,6 @@ public class Player {
         playerRect.width = player.getRegionWidth();
         playerRect.height = player.getRegionHeight();
     }
+
+
 }

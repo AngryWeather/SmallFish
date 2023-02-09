@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.angryweather.smallfish.SmallFish;
+import com.github.angryweather.smallfish.entities.FishTypes;
 import com.github.angryweather.smallfish.entities.Player;
 
 public class GameScreen implements Screen {
@@ -22,7 +23,7 @@ public class GameScreen implements Screen {
     public void show() {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
-        smallFishBlue = textureAtlas.findRegion("smallFishBlue");
+        smallFishBlue = textureAtlas.findRegion(FishTypes.smallFishBlue.toString());
         player = new Player(smallFishBlue);
     }
 
