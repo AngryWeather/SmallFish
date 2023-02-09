@@ -13,8 +13,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.angryweather.smallfish.screens.GameScreen;
 
 public class SmallFish extends Game {
-	public static final float WIDTH = 171;
-	public static final float HEIGHT = 96;
+	public static final int WIDTH = 171;
+	public static final int HEIGHT = 96;
 	public final Manager manager = new Manager();
 	public OrthographicCamera camera;
 	public Viewport viewport;

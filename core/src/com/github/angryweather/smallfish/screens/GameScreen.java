@@ -4,8 +4,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.github.angryweather.smallfish.SmallFish;
 import com.github.angryweather.smallfish.entities.EnemyFish;
 import com.github.angryweather.smallfish.entities.FishTypes;
@@ -18,8 +20,10 @@ public class GameScreen implements Screen {
     private TextureAtlas.AtlasRegion smallFishBlue;
     TextureAtlas textureAtlas;
     private Player player;
-    private long timer;
+    private long timer = TimeUtils.nanoTime();
     private final Random random = new Random();
+    private TextureRegion enemy;
+    Array<EnemyFish> enemyFishAll = new Array<>();
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -31,7 +35,6 @@ public class GameScreen implements Screen {
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = textureAtlas.findRegion(FishTypes.smallFishBlue.toString());
         player = new Player(smallFishBlue);
-        Array<EnemyFish> enemyFish = new Array<>();
 
 
     }
@@ -39,17 +42,31 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         game.camera.update();
-        System.out.println(random.nextInt(FishTypes.values().length));
+//        System.out.println(random.nextInt(FishTypes.values().length));
 
         ScreenUtils.clear(Color.TEAL);
+
+        if (TimeUtils.nanoTime() - timer > 1000000000) {
+            FishTypes randomEnemy = randomFishType();
+            enemy = textureAtlas.findRegion(randomEnemy.toString());
+            EnemyFish enemyFish = new EnemyFish(enemy, randomEnemy);
+            enemyFishAll.add(enemyFish);
+        }
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
 
+        for (EnemyFish enemyFish : enemyFishAll) {
+            enemyFish.move(delta);
+        }
 
         player.move(delta);
         game.spriteBatch.end();
 
+    }
+
+    private FishTypes randomFishType() {
+        return FishTypes.values()[random.nextInt(FishTypes.values().length)];
     }
 
     @Override

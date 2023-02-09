@@ -8,7 +8,7 @@ import com.github.angryweather.smallfish.SmallFish;
 
 public class Player {
     public final Rectangle playerRect = new Rectangle();
-    private Fish fish = new Fish(FishTypes.smallFishBlue);
+    private final Fish fish = new Fish(FishTypes.smallFishBlue);
 
     // attach a rectangle to the player
     public Player(TextureRegion player) {
