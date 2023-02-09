@@ -21,10 +21,12 @@ public class Player {
     public void move(float delta) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            playerRect.y += fish.speed * delta;
+            System.out.println(playerRect.y);
+            playerRect.y = Math.min(playerRect.y + fish.speed * delta, SmallFish.HEIGHT - playerRect.height);
         }
         if (Gdx.input.isKeyPressed((Input.Keys.DOWN))) {
-            playerRect.y -= fish.speed * delta;
+            System.out.println(playerRect.y);
+            playerRect.y = Math.max(playerRect.y - fish.speed * delta, 0);
         }
     }
 }
