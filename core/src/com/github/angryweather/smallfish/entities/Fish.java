@@ -12,7 +12,7 @@ public class Fish {
     public void setSpeed() {
         switch (fishType) {
             case smallFishBlue:
-                speed = 10;
+                speed = 20;
         }
     }
 

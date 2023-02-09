@@ -4,16 +4,22 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.angryweather.smallfish.SmallFish;
+import com.github.angryweather.smallfish.entities.EnemyFish;
 import com.github.angryweather.smallfish.entities.FishTypes;
 import com.github.angryweather.smallfish.entities.Player;
+
+import java.util.Random;
 
 public class GameScreen implements Screen {
     private final SmallFish game;
     private TextureAtlas.AtlasRegion smallFishBlue;
     TextureAtlas textureAtlas;
     private Player player;
+    private long timer;
+    private final Random random = new Random();
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -25,16 +31,22 @@ public class GameScreen implements Screen {
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = textureAtlas.findRegion(FishTypes.smallFishBlue.toString());
         player = new Player(smallFishBlue);
+        Array<EnemyFish> enemyFish = new Array<>();
+
+
     }
 
     @Override
     public void render(float delta) {
         game.camera.update();
+        System.out.println(random.nextInt(FishTypes.values().length));
 
         ScreenUtils.clear(Color.TEAL);
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
+
+
         player.move(delta);
         game.spriteBatch.end();
 
