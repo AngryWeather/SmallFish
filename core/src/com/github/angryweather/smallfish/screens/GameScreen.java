@@ -35,6 +35,7 @@ public class GameScreen implements Screen {
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
+        player.move(delta);
         game.spriteBatch.end();
 
     }
