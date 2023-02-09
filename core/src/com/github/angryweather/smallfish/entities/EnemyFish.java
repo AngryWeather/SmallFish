@@ -9,7 +9,7 @@ import java.util.Random;
 public class EnemyFish {
     public Rectangle enemyRect = new Rectangle();
     private Fish fish;
-    private TextureRegion textureRegion;
+    public TextureRegion textureRegion;
     private Random random = new Random();
 
     public EnemyFish(TextureRegion textureRegion, FishTypes fishType) {

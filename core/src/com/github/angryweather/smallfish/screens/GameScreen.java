@@ -58,9 +58,9 @@ public class GameScreen implements Screen {
         game.spriteBatch.begin();
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
 
+        // draw all enemy fish on the screen
         for (EnemyFish enemyFish : enemyFishAll) {
-            System.out.println(enemyFish.enemyRect.x);
-            game.spriteBatch.draw(enemy, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
+            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
         }
 
