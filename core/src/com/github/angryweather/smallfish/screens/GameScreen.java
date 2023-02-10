@@ -3,6 +3,7 @@ package com.github.angryweather.smallfish.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -26,6 +27,7 @@ public class GameScreen implements Screen {
     private final Random random = new Random();
     private EnemyFish enemyFish;
     Array<EnemyFish> enemyFishAll = new Array<>();
+    private final BitmapFont bitmapFontScore = new BitmapFont();
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -37,6 +39,7 @@ public class GameScreen implements Screen {
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
         player = new Player(smallFishBlue);
+        bitmapFontScore.getData().setScale(0.5f ,0.5f);
 
 
     }
@@ -69,8 +72,10 @@ public class GameScreen implements Screen {
 
             game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
-
         }
+
+        // show score on screen
+        bitmapFontScore.draw(game.spriteBatch, "Score: " + player.getScore(), 5, SmallFish.HEIGHT - 5);
 
         player.move(delta);
         game.spriteBatch.end();
