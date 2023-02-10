@@ -65,6 +65,10 @@ public class GameScreen implements Screen {
         for (Iterator<EnemyFish> it = enemyFishAll.iterator(); it.hasNext();) {
             EnemyFish enemyFish = it.next();
 
+            if (player.playerRect.overlaps(enemyFish.enemyRect)) {
+                game.setScreen(new GameOverScreen(game, player.getScore()));
+            }
+
             if (enemyFish.enemyRect.x + enemyFish.enemyRect.width < 0) {
                 player.setScore(player.getScore() + 1);
                 it.remove();

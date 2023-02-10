@@ -38,7 +38,6 @@ public class Player {
             throw new IllegalArgumentException("Score can't be zero");
         }
         this.score = score;
-        System.out.println(getScore());
     }
 
     public int add(int a) {
