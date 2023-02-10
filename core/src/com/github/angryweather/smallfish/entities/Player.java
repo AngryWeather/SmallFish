@@ -9,6 +9,7 @@ import com.github.angryweather.smallfish.SmallFish;
 public class Player {
     public final Rectangle playerRect = new Rectangle();
     private final Fish fish = new Fish(FishTypes.smallFishBlue);
+    private int score = 0;
 
     // attach a rectangle to the player
     public Player(TextureRegion player) {
@@ -26,5 +27,21 @@ public class Player {
         if (Gdx.input.isKeyPressed((Input.Keys.DOWN))) {
             playerRect.y = Math.max(playerRect.y - fish.speed * delta, 0);
         }
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        if (score < 0) {
+            throw new IllegalArgumentException("Score can't be zero");
+        }
+        this.score = score;
+        System.out.println(getScore());
+    }
+
+    public int add(int a) {
+        return a + 2;
     }
 }

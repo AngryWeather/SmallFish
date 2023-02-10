@@ -52,7 +52,6 @@ public class GameScreen implements Screen {
             TextureRegion enemy = new TextureRegion(textureAtlas.findRegion(randomEnemy.toString()));
             enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
-            System.out.println(enemyFishAll.size);
         }
 
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
@@ -62,18 +61,16 @@ public class GameScreen implements Screen {
         // draw all enemy fish on the screen
         for (Iterator<EnemyFish> it = enemyFishAll.iterator(); it.hasNext();) {
             EnemyFish enemyFish = it.next();
+
             if (enemyFish.enemyRect.x + enemyFish.enemyRect.width < 0) {
+                player.setScore(player.getScore() + 1);
                 it.remove();
             }
+
             game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
 
         }
-
-//        for (EnemyFish enemyFish : enemyFishAll) {
-//            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
-//            enemyFish.move(delta);
-//        }
 
         player.move(delta);
         game.spriteBatch.end();
