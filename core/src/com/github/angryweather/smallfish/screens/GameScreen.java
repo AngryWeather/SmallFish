@@ -12,17 +12,18 @@ import com.github.angryweather.smallfish.SmallFish;
 import com.github.angryweather.smallfish.entities.EnemyFish;
 import com.github.angryweather.smallfish.entities.FishTypes;
 import com.github.angryweather.smallfish.entities.Player;
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
 public class GameScreen implements Screen {
     private final SmallFish game;
-    private TextureAtlas.AtlasRegion smallFishBlue;
+    private TextureRegion smallFishBlue = new TextureRegion();
     TextureAtlas textureAtlas;
     private Player player;
     private long timer = TimeUtils.nanoTime();
     private final Random random = new Random();
-    private TextureRegion enemy;
+    private EnemyFish enemyFish;
     Array<EnemyFish> enemyFishAll = new Array<>();
 
     public GameScreen(final SmallFish game) {
@@ -33,7 +34,7 @@ public class GameScreen implements Screen {
     public void show() {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
-        smallFishBlue = textureAtlas.findRegion(FishTypes.smallFishBlue.toString());
+        smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
         player = new Player(smallFishBlue);
 
 
@@ -42,16 +43,15 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         game.camera.update();
-//        System.out.println(random.nextInt(FishTypes.values().length));
-
         ScreenUtils.clear(Color.TEAL);
 
         if (TimeUtils.nanoTime() - timer > 1000000000L) {
             timer = TimeUtils.nanoTime();
             FishTypes randomEnemy = randomFishType();
-            enemy = textureAtlas.findRegion(randomEnemy.toString());
-            EnemyFish enemyFish = new EnemyFish(enemy, randomEnemy);
+            TextureRegion enemy = new TextureRegion(textureAtlas.findRegion(randomEnemy.toString()));
+            enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
+//            System.out.println(enemyFishAll);
         }
 
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
@@ -60,7 +60,8 @@ public class GameScreen implements Screen {
 
         // draw all enemy fish on the screen
         for (EnemyFish enemyFish : enemyFishAll) {
-            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
+            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y,
+                    enemyFish.enemyRect.width, enemyFish.enemyRect.height);
             enemyFish.move(delta);
         }
 
