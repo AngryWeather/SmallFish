@@ -14,6 +14,7 @@ import com.github.angryweather.smallfish.entities.FishTypes;
 import com.github.angryweather.smallfish.entities.Player;
 import org.w3c.dom.Text;
 
+import java.util.Iterator;
 import java.util.Random;
 
 public class GameScreen implements Screen {
@@ -51,7 +52,7 @@ public class GameScreen implements Screen {
             TextureRegion enemy = new TextureRegion(textureAtlas.findRegion(randomEnemy.toString()));
             enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
-//            System.out.println(enemyFishAll);
+            System.out.println(enemyFishAll.size);
         }
 
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
@@ -59,11 +60,20 @@ public class GameScreen implements Screen {
         game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
 
         // draw all enemy fish on the screen
-        for (EnemyFish enemyFish : enemyFishAll) {
-            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y,
-                    enemyFish.enemyRect.width, enemyFish.enemyRect.height);
+        for (Iterator<EnemyFish> it = enemyFishAll.iterator(); it.hasNext();) {
+            EnemyFish enemyFish = it.next();
+            if (enemyFish.enemyRect.x + enemyFish.enemyRect.width < 0) {
+                it.remove();
+            }
+            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
+
         }
+
+//        for (EnemyFish enemyFish : enemyFishAll) {
+//            game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
+//            enemyFish.move(delta);
+//        }
 
         player.move(delta);
         game.spriteBatch.end();
