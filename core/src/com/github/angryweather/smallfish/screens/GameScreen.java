@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.github.angryweather.smallfish.SmallFish;
 import com.github.angryweather.smallfish.entities.EnemyFish;
 import com.github.angryweather.smallfish.entities.FishTypes;
+import com.github.angryweather.smallfish.entities.Food;
 import com.github.angryweather.smallfish.entities.Player;
 import org.w3c.dom.Text;
 
@@ -21,13 +22,15 @@ import java.util.Random;
 public class GameScreen implements Screen {
     private final SmallFish game;
     private TextureRegion smallFishBlue = new TextureRegion();
-    private TextureRegion food;
+    private TextureRegion foodRegion;
     TextureAtlas textureAtlas;
     private Player player;
     private long timer = TimeUtils.nanoTime();
     private final Random random = new Random();
     private EnemyFish enemyFish;
+    private Food food;
     Array<EnemyFish> enemyFishAll = new Array<>();
+    Array<Food> foodAll = new Array<>();
     private final BitmapFont bitmapFontScore = new BitmapFont();
 
     public GameScreen(final SmallFish game) {
@@ -39,7 +42,7 @@ public class GameScreen implements Screen {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
-        food = new TextureRegion(textureAtlas.findRegion("food"));
+//        foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
     }
@@ -55,6 +58,11 @@ public class GameScreen implements Screen {
             TextureRegion enemy = new TextureRegion(textureAtlas.findRegion(randomEnemy.toString()));
             enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
+
+            // create food on the screen
+            foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
+            food = new Food(foodRegion);
+            foodAll.add(food);
         }
 
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
@@ -76,6 +84,17 @@ public class GameScreen implements Screen {
 
             game.spriteBatch.draw(enemyFish.textureRegion, enemyFish.enemyRect.x, enemyFish.enemyRect.y);
             enemyFish.move(delta);
+        }
+
+        for (Iterator<Food> it = foodAll.iterator(); it.hasNext();) {
+            Food food = it.next();
+
+            if (food.foodRect.x + food.foodRect.width < 0) {
+                it.remove();
+            }
+
+            game.spriteBatch.draw(food.textureRegion, food.foodRect.x, food.foodRect.y);
+            food.move(delta);
         }
 
         // show score on screen
