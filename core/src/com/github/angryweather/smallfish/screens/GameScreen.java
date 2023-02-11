@@ -69,8 +69,6 @@ public class GameScreen implements Screen {
         game.spriteBatch.begin();
         game.spriteBatch.draw(player.getTextureRegion(), player.playerRect.x, player.playerRect.y);
 
-        System.out.println(player.canGetPromoted);
-
         if (player.canGetPromoted) {
             if (player.isPromoted()) {
                 if (player.promotionLevel < player.maxPromotionLevel) {

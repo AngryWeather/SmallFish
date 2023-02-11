@@ -11,6 +11,7 @@ import com.github.angryweather.smallfish.SmallFish;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.enableGLDebugOutput(true, System.out);
 		config.setForegroundFPS(60);
 		config.setTitle("Small Fish");
 		config.setWindowedMode(1280, 720);
