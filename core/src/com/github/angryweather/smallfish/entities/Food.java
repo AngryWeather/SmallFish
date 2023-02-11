@@ -16,7 +16,7 @@ public class Food {
     public Food(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
         foodRect.x = SmallFish.WIDTH;
-        foodRect.y = random.nextInt(random.nextInt(0, SmallFish.HEIGHT - textureRegion.getRegionHeight()));
+        foodRect.y = random.nextInt(SmallFish.HEIGHT - textureRegion.getRegionHeight());
         foodRect.width = textureRegion.getRegionWidth();
         foodRect.height = textureRegion.getRegionHeight();
     }

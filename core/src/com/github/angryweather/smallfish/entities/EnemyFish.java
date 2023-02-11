@@ -17,7 +17,7 @@ public class EnemyFish {
         fish = new Fish(fishType);
         this.textureRegion.flip(true, false);
         enemyRect.x = SmallFish.WIDTH;
-        enemyRect.y = random.nextInt(0, SmallFish.HEIGHT - textureRegion.getRegionHeight());
+        enemyRect.y = random.nextInt(SmallFish.HEIGHT - textureRegion.getRegionHeight());
         enemyRect.width = textureRegion.getRegionWidth();
         enemyRect.height = textureRegion.getRegionHeight();
     }
