@@ -21,6 +21,7 @@ import java.util.Random;
 public class GameScreen implements Screen {
     private final SmallFish game;
     private TextureRegion smallFishBlue = new TextureRegion();
+    private TextureRegion food;
     TextureAtlas textureAtlas;
     private Player player;
     private long timer = TimeUtils.nanoTime();
@@ -38,6 +39,7 @@ public class GameScreen implements Screen {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
+        food = new TextureRegion(textureAtlas.findRegion("food"));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
     }
@@ -110,5 +112,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         game.manager.assetManager.dispose();
+        bitmapFontScore.dispose();
     }
 }
