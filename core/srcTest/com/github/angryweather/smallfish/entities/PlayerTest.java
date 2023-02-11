@@ -45,4 +45,10 @@ public class PlayerTest {
         assertEquals(1, player.getScore());
     }
 
+    @Test
+    void testIncreaseFood() {
+        player.setFoodEaten(1);
+        assertEquals(1, player.getFoodEaten());
+    }
+
 }

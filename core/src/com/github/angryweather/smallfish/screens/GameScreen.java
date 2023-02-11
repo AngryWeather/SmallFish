@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
     Array<EnemyFish> enemyFishAll = new Array<>();
     Array<Food> foodAll = new Array<>();
     private final BitmapFont bitmapFontScore = new BitmapFont();
+    private final BitmapFont bitmapFontFood = new BitmapFont();
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -45,6 +46,7 @@ public class GameScreen implements Screen {
 //        foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
+        bitmapFontFood.getData().setScale(0.5f, 0.5f);
     }
 
     @Override
@@ -89,6 +91,11 @@ public class GameScreen implements Screen {
         for (Iterator<Food> it = foodAll.iterator(); it.hasNext();) {
             Food food = it.next();
 
+            if (player.playerRect.overlaps(food.foodRect)) {
+                it.remove();
+                player.setFoodEaten(player.getFoodEaten() + 1);
+            }
+
             if (food.foodRect.x + food.foodRect.width < 0) {
                 it.remove();
             }
@@ -99,6 +106,8 @@ public class GameScreen implements Screen {
 
         // show score on screen
         bitmapFontScore.draw(game.spriteBatch, "Score: " + player.getScore(), 5, SmallFish.HEIGHT - 5);
+        bitmapFontFood.draw(game.spriteBatch, "Food: " + player.getFoodEaten(), SmallFish.WIDTH - 30,
+                SmallFish.HEIGHT - 5);
 
         player.move(delta);
         game.spriteBatch.end();

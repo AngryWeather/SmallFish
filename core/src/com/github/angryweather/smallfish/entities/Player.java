@@ -10,13 +10,22 @@ public class Player {
     public final Rectangle playerRect = new Rectangle();
     private final Fish fish = new Fish(FishTypes.smallFishBlue);
     private int score = 0;
+    private int foodEaten = 0;
+
+    public int getFoodEaten() {
+        return foodEaten;
+    }
+
+    public void setFoodEaten(int foodEaten) {
+        this.foodEaten = foodEaten;
+    }
 
     // attach a rectangle to the player
     public Player(TextureRegion player) {
         playerRect.x = 0;
         playerRect.y = SmallFish.HEIGHT / 2f - (player.getRegionHeight() / 2f);
         playerRect.width = player.getRegionWidth();
-        playerRect.height = player.getRegionHeight();
+        playerRect.height = player.getRegionHeight() - 3;
     }
 
     public void move(float delta) {
@@ -40,7 +49,4 @@ public class Player {
         this.score = score;
     }
 
-    public int add(int a) {
-        return a + 2;
-    }
 }
