@@ -8,6 +8,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerTest {
@@ -36,6 +37,12 @@ public class PlayerTest {
                 player.setScore(-1);
             }
         });
+    }
+
+    @Test
+    void testSetScoreIncrease() {
+        player.setScore(1);
+        assertEquals(1, player.getScore());
     }
 
 }

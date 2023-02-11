@@ -40,8 +40,6 @@ public class GameScreen implements Screen {
         smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
-
-
     }
 
     @Override
