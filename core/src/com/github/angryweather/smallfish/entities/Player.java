@@ -24,8 +24,8 @@ public class Player {
     public Player(TextureRegion player) {
         playerRect.x = 0;
         playerRect.y = SmallFish.HEIGHT / 2f - (player.getRegionHeight() / 2f);
-        playerRect.width = player.getRegionWidth();
-        playerRect.height = player.getRegionHeight() - 3;
+        playerRect.width = player.getRegionWidth() - 2;
+        playerRect.height = player.getRegionHeight() - 5;
     }
 
     public void move(float delta) {
