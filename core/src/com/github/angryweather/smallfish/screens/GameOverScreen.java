@@ -1,5 +1,8 @@
 package com.github.angryweather.smallfish.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -23,6 +26,16 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.ENTER) {
+                    game.setScreen(new GameScreen(game));
+                }
+                return true;
+            }
+        });
+
         glyphLayoutLost.setText(bitmapFontYouLost, "You Lost!");
         glyphLayoutScore.setText(bitmapFontScore, "Your score: " + score);
         float bitmapFontScaleFactor = 0.7f;
@@ -59,6 +72,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void hide() {
+        Gdx.input.setInputProcessor(null);
         dispose();
     }
 

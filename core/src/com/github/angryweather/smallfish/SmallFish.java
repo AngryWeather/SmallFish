@@ -41,8 +41,8 @@ public class SmallFish extends Game {
 	}
 
 	public void dispose() {
-		manager.assetManager.dispose();
 		super.dispose();
+		manager.assetManager.dispose();
 	}
 
 }

@@ -152,7 +152,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        game.manager.assetManager.dispose();
         bitmapFontScore.dispose();
     }
 }
