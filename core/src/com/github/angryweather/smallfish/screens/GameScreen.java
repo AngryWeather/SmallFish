@@ -11,10 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.github.angryweather.smallfish.SmallFish;
-import com.github.angryweather.smallfish.entities.EnemyFish;
-import com.github.angryweather.smallfish.entities.FishTypes;
-import com.github.angryweather.smallfish.entities.Food;
-import com.github.angryweather.smallfish.entities.Player;
+import com.github.angryweather.smallfish.entities.*;
 import org.w3c.dom.Text;
 
 import java.util.Iterator;
@@ -45,7 +42,6 @@ public class GameScreen implements Screen {
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
         smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
-//        foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
         bitmapFontFood.getData().setScale(0.5f, 0.5f);
@@ -71,7 +67,24 @@ public class GameScreen implements Screen {
 
         game.spriteBatch.setProjectionMatrix(game.camera.combined);
         game.spriteBatch.begin();
-        game.spriteBatch.draw(smallFishBlue, player.playerRect.x, player.playerRect.y);
+        game.spriteBatch.draw(player.getTextureRegion(), player.playerRect.x, player.playerRect.y);
+
+        System.out.println(player.canGetPromoted);
+
+        if (player.canGetPromoted) {
+            if (player.isPromoted()) {
+                if (player.promotionLevel < player.maxPromotionLevel) {
+                    System.out.println("promotion level: " + player.promotionLevel);
+                    player.promotionLevel += 1;
+                    player.setFish(new Fish(FishTypes.values()[player.promotionLevel]));
+                    System.out.println(player.getFish().getFishType());
+                    TextureRegion playerTextureRegion = new TextureRegion(textureAtlas.findRegion(
+                            player.getFish().getFishType().toString()));
+                    player.setTextureRegion(playerTextureRegion);
+                    player.canGetPromoted = false;
+                }
+            }
+        }
 
         // draw all enemy fish on the screen
         for (Iterator<EnemyFish> it = enemyFishAll.iterator(); it.hasNext();) {

@@ -1,5 +1,6 @@
 package com.github.angryweather.smallfish;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -26,8 +27,7 @@ public class SmallFish extends Game {
 
 	@Override
 	public void create() {
-		glProfiler = new GLProfiler(Gdx.graphics);
-		glProfiler.enable();
+		Gdx.app.setLogLevel(Application.LOG_INFO);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SmallFish.WIDTH, SmallFish.HEIGHT);
 		viewport = new FitViewport(SmallFish.WIDTH, SmallFish.HEIGHT, camera);
@@ -38,16 +38,11 @@ public class SmallFish extends Game {
 
 	public void render() {
 		super.render();
-		glProfiler.getCalls();
-		glProfiler.getListener();
-		glProfiler.reset();
-
 	}
 
 	public void dispose() {
 		manager.assetManager.dispose();
 		super.dispose();
-		glProfiler.disable();
 	}
 
 }

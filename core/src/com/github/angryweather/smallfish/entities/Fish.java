@@ -2,12 +2,21 @@ package com.github.angryweather.smallfish.entities;
 
 public class Fish {
     public int speed;
-    private final FishTypes fishType;
+    private FishTypes fishType;
+
+    public FishTypes getFishType() {
+        return fishType;
+    }
+
+    public void setFishType(FishTypes fishType) {
+        this.fishType = fishType;
+    }
 
     public Fish(FishTypes fishType) {
         this.fishType = fishType;
         setSpeed();
     }
+
 
     public void setSpeed() {
         switch (fishType) {
