@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
         scoreSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/score.wav"));
 
         game.manager.loadGameAssets();
-        textureAtlas = game.manager.assetManager.get("assets/images/fish.atlas", TextureAtlas.class);
+        textureAtlas = game.manager.assetManager.get("images/fish.atlas", TextureAtlas.class);
         TextureRegion smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
