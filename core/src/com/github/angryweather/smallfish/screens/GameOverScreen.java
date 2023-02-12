@@ -16,6 +16,8 @@ public class GameOverScreen implements Screen {
     private final GlyphLayout glyphLayoutScore = new GlyphLayout();
     private final BitmapFont bitmapFontYouLost = new BitmapFont();
     private final BitmapFont bitmapFontScore = new BitmapFont();
+    private final GlyphLayout glyphLayoutAgain = new GlyphLayout();
+    private final BitmapFont bitmapFontAgain = new BitmapFont();
     private final int score;
 
 
@@ -38,9 +40,11 @@ public class GameOverScreen implements Screen {
 
         glyphLayoutLost.setText(bitmapFontYouLost, "You Lost!");
         glyphLayoutScore.setText(bitmapFontScore, "Your score: " + score);
+        glyphLayoutAgain.setText(bitmapFontAgain, "Press enter to try again");
         float bitmapFontScaleFactor = 0.7f;
         bitmapFontYouLost.getData().setScale(bitmapFontScaleFactor);
         bitmapFontScore.getData().setScale(bitmapFontScaleFactor);
+        bitmapFontAgain.getData().setScale(0.7f);
     }
 
     @Override
@@ -51,6 +55,8 @@ public class GameOverScreen implements Screen {
                 SmallFish.HEIGHT / 2f + glyphLayoutLost.height);
         bitmapFontScore.draw(game.spriteBatch, glyphLayoutScore, SmallFish.WIDTH / 2f - glyphLayoutScore.width / 2,
                 SmallFish.HEIGHT / 2f - bitmapFontYouLost.getScaleY() - 10);
+        bitmapFontAgain.draw(game.spriteBatch, glyphLayoutAgain, SmallFish.WIDTH / 2f - glyphLayoutAgain.width / 2,
+                SmallFish.HEIGHT / 2f - bitmapFontScore.getScaleY() - 30);
         game.spriteBatch.end();
 
     }
@@ -80,5 +86,6 @@ public class GameOverScreen implements Screen {
     public void dispose() {
         bitmapFontScore.dispose();
         bitmapFontYouLost.dispose();
+        bitmapFontAgain.dispose();
     }
 }
