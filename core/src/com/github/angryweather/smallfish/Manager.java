@@ -7,7 +7,7 @@ public class Manager {
     public final AssetManager assetManager = new AssetManager();
 
     public void loadGameAssets() {
-        assetManager.load("assets/fish.atlas", TextureAtlas.class);
+        assetManager.load("assets/images/fish.atlas", TextureAtlas.class);
         assetManager.finishLoading();
     }
 }
