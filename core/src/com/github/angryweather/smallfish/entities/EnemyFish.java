@@ -7,16 +7,16 @@ import com.github.angryweather.smallfish.SmallFish;
 import java.util.Random;
 
 public class EnemyFish {
-    public Rectangle enemyRect = new Rectangle();
-    private Fish fish;
-    public TextureRegion textureRegion;
-    private Random random = new Random();
+    public final Rectangle enemyRect = new Rectangle();
+    private final Fish fish;
+    public final TextureRegion textureRegion;
 
     public EnemyFish(TextureRegion textureRegion, FishTypes fishType) {
         this.textureRegion = textureRegion;
         fish = new Fish(fishType);
         this.textureRegion.flip(true, false);
         enemyRect.x = SmallFish.WIDTH;
+        Random random = new Random();
         enemyRect.y = random.nextInt(SmallFish.HEIGHT - textureRegion.getRegionHeight());
         enemyRect.width = textureRegion.getRegionWidth();
         enemyRect.height = textureRegion.getRegionHeight();

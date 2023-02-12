@@ -4,33 +4,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.github.angryweather.smallfish.SmallFish;
 import com.github.angryweather.smallfish.entities.*;
-import org.w3c.dom.Text;
 
 import java.util.Iterator;
 import java.util.Random;
 
 public class GameScreen implements Screen {
     private final SmallFish game;
-    private TextureRegion smallFishBlue = new TextureRegion();
-    private TextureRegion foodRegion;
     TextureAtlas textureAtlas;
     private Player player;
     private long timer = TimeUtils.nanoTime();
     private final Random random = new Random();
-    private EnemyFish enemyFish;
-    private Food food;
-    Array<EnemyFish> enemyFishAll = new Array<>();
-    Array<Food> foodAll = new Array<>();
+    final Array<EnemyFish> enemyFishAll = new Array<>();
+    final Array<Food> foodAll = new Array<>();
     private final BitmapFont bitmapFontScore = new BitmapFont();
     private final BitmapFont bitmapFontFood = new BitmapFont();
     private Sound foodSound;
@@ -47,7 +40,7 @@ public class GameScreen implements Screen {
 
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
-        smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
+        TextureRegion smallFishBlue = new TextureRegion(textureAtlas.findRegion(FishTypes.smallFishBlue.toString()));
         player = new Player(smallFishBlue);
         bitmapFontScore.getData().setScale(0.5f ,0.5f);
         bitmapFontFood.getData().setScale(0.5f, 0.5f);
@@ -62,12 +55,12 @@ public class GameScreen implements Screen {
             timer = TimeUtils.nanoTime();
             FishTypes randomEnemy = randomFishType();
             TextureRegion enemy = new TextureRegion(textureAtlas.findRegion(randomEnemy.toString()));
-            enemyFish = new EnemyFish(enemy, randomEnemy);
+            EnemyFish enemyFish = new EnemyFish(enemy, randomEnemy);
             enemyFishAll.add(enemyFish);
 
             // create food on the screen
-            foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
-            food = new Food(foodRegion);
+            TextureRegion foodRegion = new TextureRegion(textureAtlas.findRegion("food"));
+            Food food = new Food(foodRegion);
             foodAll.add(food);
         }
 

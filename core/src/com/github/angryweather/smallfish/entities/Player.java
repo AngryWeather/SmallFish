@@ -12,7 +12,7 @@ public class Player {
     private Fish fish = new Fish(FishTypes.smallFishBlue);
     private int score = 0;
     private int foodEaten = 0;
-    public int maxPromotionLevel = FishTypes.values().length - 1;
+    public final int maxPromotionLevel = FishTypes.values().length - 1;
     public int promotionLevel = 0;
     public boolean canGetPromoted = false;
 
@@ -48,10 +48,6 @@ public class Player {
     public void setFoodEaten(int foodEaten) {
         canGetPromoted = foodEaten > this.foodEaten;
         this.foodEaten = foodEaten;
-    }
-
-    public int getFishTypeOrdinal() {
-        return fish.getFishType().ordinal();
     }
 
     public void move(float delta) {

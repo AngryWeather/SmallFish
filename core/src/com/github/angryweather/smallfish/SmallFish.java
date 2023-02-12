@@ -1,17 +1,11 @@
 package com.github.angryweather.smallfish;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.profiling.GLProfiler;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.angryweather.smallfish.screens.GameScreen;
 
@@ -22,7 +16,6 @@ public class SmallFish extends Game {
 	public OrthographicCamera camera;
 	public Viewport viewport;
 	public SpriteBatch spriteBatch;
-	private GLProfiler glProfiler;
 
 
 	@Override
