@@ -1,6 +1,8 @@
 package com.github.angryweather.smallfish.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -31,6 +33,8 @@ public class GameScreen implements Screen {
     Array<Food> foodAll = new Array<>();
     private final BitmapFont bitmapFontScore = new BitmapFont();
     private final BitmapFont bitmapFontFood = new BitmapFont();
+    private Sound foodSound;
+    private Sound scoreSound;
 
     public GameScreen(final SmallFish game) {
         this.game = game;
@@ -38,6 +42,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        foodSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/food.wav"));
+        scoreSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/score.wav"));
 
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("assets/fish.atlas", TextureAtlas.class);
@@ -93,6 +99,7 @@ public class GameScreen implements Screen {
             }
 
             if (enemyFish.enemyRect.x + enemyFish.enemyRect.width < 0) {
+                scoreSound.play();
                 player.setScore(player.getScore() + 1);
                 it.remove();
             }
@@ -105,6 +112,7 @@ public class GameScreen implements Screen {
             Food food = it.next();
 
             if (player.playerRect.overlaps(food.foodRect)) {
+                foodSound.play();
                 it.remove();
                 player.setFoodEaten(player.getFoodEaten() + 1);
             }
@@ -153,5 +161,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         bitmapFontScore.dispose();
+        scoreSound.dispose();
+        foodSound.dispose();
     }
 }

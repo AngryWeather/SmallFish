@@ -76,7 +76,7 @@ public class Player {
     }
 
     public boolean isPromoted() {
-        return getFoodEaten() % 2 == 0 && getFoodEaten() != 0;
+        return getFoodEaten() % 10 == 0 && getFoodEaten() != 0;
     }
 
 }
