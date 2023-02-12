@@ -1,6 +1,7 @@
 package com.github.angryweather.smallfish.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -35,8 +36,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        foodSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/food.wav"));
-        scoreSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/score.wav"));
+        Gdx.input.setCatchKey(Input.Keys.DOWN, true);
+        Gdx.input.setCatchKey(Input.Keys.UP, true);
+
+        foodSound = Gdx.audio.newSound(Gdx.files.internal("sounds/food.wav"));
+        scoreSound = Gdx.audio.newSound(Gdx.files.internal("sounds/score.wav"));
 
         game.manager.loadGameAssets();
         textureAtlas = game.manager.assetManager.get("images/fish.atlas", TextureAtlas.class);
